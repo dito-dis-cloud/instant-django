@@ -31,4 +31,4 @@ EXPOSE 8080/tcp
 
 # Specify the command to run on container start
 #CMD [ "python", "./app.py" ]
-CMD [ "manage.py", "runserver" ]
+CMD [ "python", "manage.py", "runserver" ]
