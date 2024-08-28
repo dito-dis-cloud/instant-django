@@ -1,6 +1,9 @@
 #FROM registry.access.redhat.com/ubi9/python-39:1-117.1684741281
 FROM registry.access.redhat.com/ubi9/python-311:1-72.1724040033
 
+# Install any dependencies
+RUN pip install -r requirements.txt
+
 # Set the working directory in the container
 WORKDIR /projects
 
@@ -11,9 +14,9 @@ COPY . .
 WORKDIR instant-django/
 
 # Install any dependencies
-RUN python3 -m venv env
-RUN source env/bin/activate
-RUN pip install -r requirements.txt
+#RUN python3 -m venv env
+#RUN source env/bin/activate
+#RUN pip install -r requirements.txt
 RUN python manage.py migrate
 RUN python manage.py createsuperuser
 
