@@ -2,7 +2,13 @@
 FROM registry.access.redhat.com/ubi9/python-311:1-72.1724040033
 
 # Install any dependencies
-RUN pip install -r requirements.txt
+#RUN pip install -r requirements.txt
+RUN \
+  if [ -f requirements.txt ]; \
+    then pip install -r requirements.txt; \
+  elif [ `ls -1q *.txt | wc -l` == 1 ]; \
+    then pip install -r *.txt; \
+  fi
 
 # Set the working directory in the container
 WORKDIR /projects
