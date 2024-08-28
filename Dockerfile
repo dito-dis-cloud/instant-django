@@ -10,9 +10,6 @@ COPY . .
 ## Change directory to site/
 #WORKDIR instant-django/
 
-RUN python -m venv env
-RUN env\Scripts\activate
-
 # Install any dependencies
 #RUN pip install -r requirements.txt
 RUN \
