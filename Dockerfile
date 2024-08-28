@@ -1,15 +1,6 @@
 #FROM registry.access.redhat.com/ubi9/python-39:1-117.1684741281
 FROM registry.access.redhat.com/ubi9/python-311:1-72.1724040033
 
-# Install any dependencies
-#RUN pip install -r requirements.txt
-#RUN \
-#  if [ -f requirements.txt ]; \
-#    then pip install -r requirements.txt; \
-#  elif [ `ls -1q *.txt | wc -l` == 1 ]; \
-#    then pip install -r *.txt; \
-#  fi
-
 # Set the working directory in the container
 WORKDIR /projects
 
@@ -18,6 +9,15 @@ COPY . .
 
 ## Change directory to site/
 #WORKDIR instant-django/
+
+# Install any dependencies
+#RUN pip install -r requirements.txt
+RUN \
+  if [ -f requirements.txt ]; \
+    then pip install -r requirements.txt; \
+  elif [ `ls -1q *.txt | wc -l` == 1 ]; \
+    then pip install -r *.txt; \
+  fi
 
 # Install any dependencies
 #RUN python3 -m venv env
