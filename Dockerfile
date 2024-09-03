@@ -8,8 +8,8 @@ WORKDIR /app-src
 #COPY . .
 
 # Add application sources with correct permissions for OpenShift
-USER 0
 COPY . .
+USER 0
 RUN chown -R 1001:0 ./
 USER 1001
 
