@@ -5,11 +5,11 @@ FROM registry.access.redhat.com/ubi8/python-36
 WORKDIR /app-src
 
 # Copy the content of the local src directory to the working directory
-COPY . .
+#COPY . .
 
 # Add application sources with correct permissions for OpenShift
 USER 0
-#COPY . .
+COPY . .
 RUN chown -R 1001:0 ./
 USER 1001
 
@@ -23,7 +23,7 @@ USER 1001
 #    source env/bin/activate &&\
 RUN pip install -r requirements.txt &&\
     python manage.py migrate &&\
-    chmod 766 admin db.sqlite3 &&\
+    chmod 777 admin db.sqlite3 &&\
     python manage.py custom_createsuperuser --username admin --email admin@example.com --password admin
 #    python manage.py createsuperuser
 #    python manage.py custom_createsuperuser --username admin --email admin@example.com --password admin
