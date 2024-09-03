@@ -8,10 +8,10 @@ WORKDIR /app-src
 COPY . .
 
 # Add application sources with correct permissions for OpenShift
-#USER 0
+USER 0
 #COPY . .
-#RUN chown -R 1001:0 ./
-#USER 1001
+RUN chown -R 1001:0 ./
+USER 1001
 
 # Install the dependencies
 #RUN pip install -U "pip>=19.3.1" && \
