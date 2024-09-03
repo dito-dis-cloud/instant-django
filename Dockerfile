@@ -1,5 +1,5 @@
-#FROM registry.access.redhat.com/ubi8/python-36
-FROM registry.access.redhat.com/ubi9/python-311:1-72.1724040033
+FROM registry.access.redhat.com/ubi8/python-36
+#FROM registry.access.redhat.com/ubi9/python-311:1-72.1724040033
 
 # Set the working directory in the container
 WORKDIR /app-src
@@ -19,9 +19,9 @@ USER 1001
 #    python manage.py collectstatic --noinput && \
 #    python manage.py migrate
 
-RUN python3 -m venv env &&\
-    source env/bin/activate &&\
-    pip install -r requirements.txt &&\
+#RUN python3 -m venv env &&\
+#    source env/bin/activate &&\
+RUN pip install -r requirements.txt &&\
     python manage.py migrate &&\
     python manage.py createsuperuser
 
