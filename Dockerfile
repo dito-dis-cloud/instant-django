@@ -26,5 +26,8 @@ RUN pip install -r requirements.txt &&\
 #    python manage.py createsuperuser
     python manage.py custom_createsuperuser --username admin --email admin@example.com --password admin
 
+#RUN db.sqlite3 : changing permissions
+RUN sudo chmod 766 db.sqlite3
+
 # Run the application
 CMD python manage.py runserver 0.0.0.0:8080
