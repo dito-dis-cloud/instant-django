@@ -26,7 +26,7 @@ SECRET_KEY = '_(u)&e-3076d7_a(gfhb85*)u-u4vwc%#qt7c7q3-t98%lvp&g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [instant-django-git-cec01-dev.apps.sandbox-m4.g2pi.p1.openshiftapps.com]
+ALLOWED_HOSTS = []
 
 # Application definition
 
