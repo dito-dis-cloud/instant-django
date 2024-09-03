@@ -23,7 +23,8 @@ USER 1001
 #    source env/bin/activate &&\
 RUN pip install -r requirements.txt &&\
     python manage.py migrate &&\
-    python manage.py createsuperuser
+#    python manage.py createsuperuser
+    python manage.py custom_createsuperuser --username admin --email admin@example.com --password admin
 
 # Run the application
 CMD python manage.py runserver 0.0.0.0:8080
