@@ -1,34 +1,29 @@
-#FROM registry.access.redhat.com/ubi9/python-39:1-117.1684741281
+#FROM registry.access.redhat.com/ubi8/python-36
 FROM registry.access.redhat.com/ubi9/python-311:1-72.1724040033
 
 # Set the working directory in the container
-WORKDIR /projects
+WORKDIR /app-src
 
 # Copy the content of the local src directory to the working directory
 COPY . .
 
-## Change directory to site/
-#WORKDIR instant-django/
+# Add application sources with correct permissions for OpenShift
+USER 0
+COPY . .
+RUN chown -R 1001:0 ./
+USER 1001
 
-# Install any dependencies
-#RUN pip install -r requirements.txt
-RUN \
-  if [ -f requirements.txt ]; \
-    then pip install -r requirements.txt; \
-  elif [ `ls -1q *.txt | wc -l` == 1 ]; \
-    then pip install -r *.txt; \
-  fi
+# Install the dependencies
+#RUN pip install -U "pip>=19.3.1" && \
+#    pip install -r requirements.txt && \
+#    python manage.py collectstatic --noinput && \
+#    python manage.py migrate
 
-# Install any dependencies
-#RUN python3 -m venv env
-#RUN source env/bin/activate
-#RUN pip install -r requirements.txt
-RUN python manage.py migrate
-RUN python manage.py createsuperuser
+RUN python3 -m venv env &&\
+    source env/bin/activate &&\
+    pip install -r requirements.txt &&\
+    python manage.py migrate &&\
+    python manage.py createsuperuser
 
-# By default, listen on port 8080
-EXPOSE 8080/tcp
-
-# Specify the command to run on container start
-#CMD [ "python", "./app.py" ]
-CMD [ "python", "manage.py", "runserver" ]
+# Run the application
+CMD python manage.py runserver 0.0.0.0:8080
