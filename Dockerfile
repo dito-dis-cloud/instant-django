@@ -24,10 +24,11 @@ USER 1001
 RUN pip install -r requirements.txt &&\
     python manage.py migrate &&\
 #    python manage.py createsuperuser
-    python manage.py custom_createsuperuser --username admin --email admin@example.com --password admin
+#    python manage.py custom_createsuperuser --username admin --email admin@example.com --password admin
 
 #RUN db.sqlite3 : changing permissions
 RUN chmod 766 db.sqlite3
+RUN python manage.py custom_createsuperuser --username admin --email admin@example.com --password admin
 
 # Run the application
 CMD python manage.py runserver 0.0.0.0:8080
